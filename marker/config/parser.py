@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Dict
+from typing import Dict, Any
 
 import click
 
@@ -47,7 +47,7 @@ class ConfigParser:
         fn = click.option("--force_layout_block", type=click.Choice(choices=[t.name for t in BlockTypes]), default=None,)(fn)
         return fn
 
-    def generate_config_dict(self) -> Dict[str, any]:
+    def generate_config_dict(self) -> Dict[str, Any]:
         config = {}
         output_dir = self.cli_options.get("output_dir", settings.OUTPUT_DIR)
         for k, v in self.cli_options.items():

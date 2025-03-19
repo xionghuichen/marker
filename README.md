@@ -32,11 +32,11 @@ As you can see, the use_llm mode offers higher accuracy than marker or gemini al
 
 ## Examples
 
-| PDF | File type | Markdown                                                                                                                     | JSON                                                                                                   |
-|-----|-----------|------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| [Think Python](https://greenteapress.com/thinkpython/thinkpython.pdf) | Textbook | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/markdown/thinkpython/thinkpython.md)                 | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/json/thinkpython.json)         |
-| [Switch Transformers](https://arxiv.org/pdf/2101.03961.pdf) | arXiv paper | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/markdown/switch_transformers/switch_trans.md) | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/json/switch_trans.json) |
-| [Multi-column CNN](https://arxiv.org/pdf/1804.07821.pdf) | arXiv paper | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/markdown/multicolcnn/multicolcnn.md)                 | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/json/multicolcnn.json)         |
+| PDF                                                                | File type   | Markdown                                                                                                           | JSON                                                                                         |
+| ------------------------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| [Think Python](https://greenteapress.com/thinkpython/thinkpython.pdf) | Textbook    | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/markdown/thinkpython/thinkpython.md)          | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/json/thinkpython.json)  |
+| [Switch Transformers](https://arxiv.org/pdf/2101.03961.pdf)           | arXiv paper | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/markdown/switch_transformers/switch_trans.md) | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/json/switch_trans.json) |
+| [Multi-column CNN](https://arxiv.org/pdf/1804.07821.pdf)              | arXiv paper | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/markdown/multicolcnn/multicolcnn.md)          | [View](https://github.com/VikParuchuri/marker/blob/master/data/examples/json/multicolcnn.json)  |
 
 # Commercial usage
 
@@ -48,7 +48,7 @@ The weights for the models are licensed `cc-by-nc-sa-4.0`, but I will waive that
 
 There's a hosted API for marker available [here](https://www.datalab.to/):
 
-- Supports PDFs, word documents, and powerpoints 
+- Supports PDFs, word documents, and powerpoints
 - 1/4th the price of leading cloud-based competitors
 - High uptime (99.99%), quality, and speed (around 15 seconds to convert a 250 page PDF)
 
@@ -97,23 +97,40 @@ marker_single /path/to/file.pdf
 You can pass in PDFs or images.
 
 Options:
-- `--output_dir PATH`: Directory where output files will be saved. Defaults to the value specified in settings.OUTPUT_DIR.
-- `--output_format [markdown|json|html]`: Specify the format for the output results.
-- `--paginate_output`: Paginates the output, using `\n\n{PAGE_NUMBER}` followed by `-` * 48, then `\n\n` 
-- `--use_llm`: Uses an LLM to improve accuracy.  You must set your Gemini API key using the `GOOGLE_API_KEY` env var.
-- `--redo_inline_math`: If you want the highest quality inline math conversion, use this along with `--use_llm`.
-- `--disable_image_extraction`: Don't extract images from the PDF.  If you also specify `--use_llm`, then images will be replaced with a description.
-- `--page_range TEXT`: Specify which pages to process. Accepts comma-separated page numbers and ranges. Example: `--page_range "0,5-10,20"` will process pages 0, 5 through 10, and page 20.
-- `--force_ocr`: Force OCR processing on the entire document, even for pages that might contain extractable text.
-- `--strip_existing_ocr`: Remove all existing OCR text in the document and re-OCR with surya.
-- `--debug`: Enable debug mode for additional logging and diagnostic information.
-- `--processors TEXT`: Override the default processors by providing their full module paths, separated by commas. Example: `--processors "module1.processor1,module2.processor2"`
-- `--config_json PATH`: Path to a JSON configuration file containing additional settings.
-- `--languages TEXT`: Optionally specify which languages to use for OCR processing. Accepts a comma-separated list. Example: `--languages "en,fr,de"` for English, French, and German.
-- `config --help`: List all available builders, processors, and converters, and their associated configuration.  These values can be used to build a JSON configuration file for additional tweaking of marker defaults.
-- `--converter_cls`: One of `marker.converters.pdf.PdfConverter` (default) or `marker.converters.table.TableConverter`.  The `PdfConverter` will convert the whole PDF, the `TableConverter` will only extract and convert tables.
-- `--llm_service`: Which llm service to use if `--use_llm` is passed.  This defaults to `marker.services.gemini.GoogleGeminiService`.
-- `--help`: see all of the flags that can be passed into marker.  (it supports many more options then are listed above)
+
+`--output_dir PATH`: Directory where output files will be saved. Defaults to the value specified in settings.OUTPUT_DIR.
+
+`--output_format [markdown|json|html]`: Specify the format for the output results.
+
+`--paginate_output`: Paginates the output, using `\n\n{PAGE_NUMBER}` followed by `-` * 48, then `\n\n`
+
+`--use_llm`: Uses an LLM to improve accuracy.  You must set your Gemini API key using the `GOOGLE_API_KEY` env var.
+
+`--redo_inline_math`: If you want the highest quality inline math conversion, use this along with `--use_llm`.
+
+`--disable_image_extraction`: Don't extract images from the PDF.  If you also specify `--use_llm`, then images will be replaced with a description.
+
+`--page_range TEXT`: Specify which pages to process. Accepts comma-separated page numbers and ranges. Example: `--page_range "0,5-10,20"` will process pages 0, 5 through 10, and page 20.
+
+`--force_ocr`: Force OCR processing on the entire document, even for pages that might contain extractable text.
+
+`--strip_existing_ocr`: Remove all existing OCR text in the document and re-OCR with surya.
+
+`--debug`: Enable debug mode for additional logging and diagnostic information.
+
+`--processors TEXT`: Override the default processors by providing their full module paths, separated by commas. Example: `--processors "module1.processor1,module2.processor2"`
+
+`--config_json PATH`: Path to a JSON configuration file containing additional settings.
+
+`--languages TEXT`: Optionally specify which languages to use for OCR processing. Accepts a comma-separated list. Example: `--languages "en,fr,de"` for English, French, and German.
+
+`config --help`: List all available builders, processors, and converters, and their associated configuration.  These values can be used to build a JSON configuration file for additional tweaking of marker defaults.
+
+`--converter_cls`: One of `marker.converters.pdf.PdfConverter` (default) or `marker.converters.table.TableConverter`.  The `PdfConverter` will convert the whole PDF, the `TableConverter` will only extract and convert tables.
+
+`--llm_service`: Which llm service to use if `--use_llm` is passed.  This defaults to `marker.services.gemini.GoogleGeminiService`.
+
+`--help`: see all of the flags that can be passed into marker.  (it supports many more options then are listed above)
 
 The list of supported languages for surya OCR is [here](https://github.com/VikParuchuri/surya/blob/master/surya/recognition/languages.py).  If you don't need OCR, marker can work with any language.
 
@@ -180,7 +197,7 @@ rendered = converter("FILEPATH")
 
 ### Extract blocks
 
-Each document consists of one or more pages.  Pages contain blocks, which can themselves contain other blocks.  It's possible to programmatically manipulate these blocks.  
+Each document consists of one or more pages.  Pages contain blocks, which can themselves contain other blocks.  It's possible to programmatically manipulate these blocks.
 
 Here's an example of extracting all forms from a document:
 
@@ -220,7 +237,8 @@ text, _, images = text_from_rendered(rendered)
 
 This takes all the same configuration as the PdfConverter.  You can specify the configuration `force_layout_block=Table` to avoid layout detection and instead assume every page is a table.  Set `output_format=json` to also get cell bounding boxes.
 
-You can also run this via the CLI with 
+You can also run this via the CLI with
+
 ```shell
 marker_single FILENAME --use_llm --force_layout_block Table --converter_cls marker.converters.table.TableConverter --output_format json
 ```
@@ -249,7 +267,7 @@ HTML output is similar to markdown output:
 
 JSON output will be organized in a tree-like structure, with the leaf nodes being blocks.  Examples of leaf nodes are a single list item, a paragraph of text, or an image.
 
-The output will be a list, with each list item representing a page.  Each page is considered a block in the internal marker schema.  There are different types of blocks to represent different elements.  
+The output will be a list, with each list item representing a page.  Each page is considered a block in the internal marker schema.  There are different types of blocks to represent different elements.
 
 Pages have the keys:
 
@@ -393,7 +411,7 @@ Pass the `debug` option to activate debug mode.  This will save images of each p
 We created a [benchmark set](https://huggingface.co/datasets/datalab-to/marker_benchmark) by extracting single PDF pages from common crawl.  We scored based on a heuristic that aligns text with ground truth text segments, and an LLM as a judge scoring method.
 
 | Method     | Avg Time | Heuristic Score | LLM Score |
-|------------|----------|-----------------|-----------|
+| ---------- | -------- | --------------- | --------- |
 | marker     | 2.83837  | 95.6709         | 4.23916   |
 | llamaparse | 23.348   | 84.2442         | 3.97619   |
 | mathpix    | 6.36223  | 86.4281         | 4.15626   |
@@ -404,7 +422,7 @@ Benchmarks were run on an H100 for markjer and docling - llamaparse and mathpix 
 <img src="data/images/per_doc.png" width="1000px"/>
 
 | Document Type        | Marker heuristic | Marker LLM | Llamaparse Heuristic | Llamaparse LLM | Mathpix Heuristic | Mathpix LLM | Docling Heuristic | Docling LLM |
-|----------------------|------------------|------------|----------------------|----------------|-------------------|-------------|-------------------|-------------|
+| -------------------- | ---------------- | ---------- | -------------------- | -------------- | ----------------- | ----------- | ----------------- | ----------- |
 | Scientific paper     | 96.6737          | 4.34899    | 87.1651              | 3.96421        | 91.2267           | 4.46861     | 92.135            | 3.72422     |
 | Book page            | 97.1846          | 4.16168    | 90.9532              | 4.07186        | 93.8886           | 4.35329     | 90.0556           | 3.64671     |
 | Other                | 95.1632          | 4.25076    | 81.1385              | 4.01835        | 79.6231           | 4.00306     | 83.8223           | 3.76147     |
@@ -421,9 +439,9 @@ Benchmarks were run on an H100 for markjer and docling - llamaparse and mathpix 
 
 We benchmarked throughput using a [single long PDF](https://www.greenteapress.com/thinkpython/thinkpython.pdf).
 
-| Method  | Time per page | Time per document | VRAM used |
-|---------|---------------|-------------------|---------- |
-| marker  | 0.18          | 43.42             |  3.17GB   |
+| Method | Time per page | Time per document | VRAM used |
+| ------ | ------------- | ----------------- | --------- |
+| marker | 0.18          | 43.42             | 3.17GB    |
 
 The projected throughput is 122 pages per second on an H100 - we can run 22 individual processes given the VRAM used.
 
@@ -432,7 +450,7 @@ The projected throughput is 122 pages per second on an H100 - we can run 22 indi
 Marker can extract tables from PDFs using `marker.converters.table.TableConverter`. The table extraction performance is measured by comparing the extracted HTML representation of tables against the original HTML representations using the test split of [FinTabNet](https://developer.ibm.com/exchanges/data/all/fintabnet/). The HTML representations are compared using a tree edit distance based metric to judge both structure and content. Marker detects and identifies the structure of all tables in a PDF page and achieves these scores:
 
 | Method           | Avg score | Total tables |
-|------------------|-----------|--------------|
+| ---------------- | --------- | ------------ |
 | marker           | 0.816     | 99           |
 | marker w/use_llm | 0.907     | 99           |
 | gemini           | 0.829     | 99           |
@@ -466,6 +484,7 @@ Options:
 - `--scores` which scoring functions to use, can be `llm`, `heuristic`.  Comma separated.
 
 ### Table Conversion
+
 The processed FinTabNet dataset is hosted [here](https://huggingface.co/datasets/datalab-to/fintabnet-test) and is automatically downloaded. Run the benchmark with:
 
 ```shell
