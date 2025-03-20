@@ -38,3 +38,4 @@ def convert_single_cli(fpath: str, **kwargs):
 
     print(f"Saved markdown to {out_folder}")
     print(f"Total time: {time.time() - start}")
+    
